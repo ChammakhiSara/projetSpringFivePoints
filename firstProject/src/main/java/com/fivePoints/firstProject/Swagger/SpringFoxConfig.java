@@ -1,4 +1,4 @@
-package com.fivePoints.firstProject.Swaggers;
+package com.fivePoints.firstProject.Swagger;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
