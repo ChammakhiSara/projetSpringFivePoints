@@ -25,8 +25,9 @@ public class FirstProjectApplication {
 		SpringApplication.run(FirstProjectApplication.class, args);
 	}
 
-	@EventListener(ApplicationReadyEvent.class)
-	public void triggerWhenStarts(){
-		sendMailService.sendEmail("chourabiseif94@gmail.com", "Hi Hello", "Test");
-	}
+	//c'est pour sending un simple email avec gmail
+	//@EventListener(ApplicationReadyEvent.class)
+	//public void triggerWhenStarts(){
+		//sendMailService.sendEmail("chourabiseif94@gmail.com", "Hi Hello", "Test");
+	//}
 }

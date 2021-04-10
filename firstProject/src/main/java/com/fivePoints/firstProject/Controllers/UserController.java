@@ -29,13 +29,25 @@ public class UserController {
         return this.userService.getUsers();
     }
 
-    @DeleteMapping("/users/{id}")
-    public String deleteUser (@PathParam("id") int id){
+    @RequestMapping(method = RequestMethod.DELETE, value = "/users/{id}")
+    public String deleteUser (@PathVariable("id") int id){
         return this.userService.deleteUser(id);
     }
 
-    @PutMapping("/users/{id}")
-    public User update(@RequestBody User user,@PathParam("id") int id){
+    @RequestMapping(method = RequestMethod.PUT, value = "/users/{id}")
+    public User update(@RequestBody User user,@PathVariable("id") int id){
        return userService.updateUser(user, id);
     }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/users/V1/{email}/{firstName}")
+    public User getUserByEmailAndFirstName(@PathVariable("email") String email, @PathVariable("firstName") String firstName){
+        return this.userService.getUserByEmailAndFirstName(email, firstName);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/users/V2/{email}/{firstName}")
+    public User getUserByEmailAndFtName(@PathVariable("email") String email, @PathVariable("firstName") String firstName){
+        return this.userService.getUserByEmailAndFtName(email, firstName);
+    }
 }
+
+
