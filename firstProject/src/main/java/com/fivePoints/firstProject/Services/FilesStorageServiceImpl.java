@@ -1,5 +1,8 @@
 package com.fivePoints.firstProject.Services;
 
+import com.fivePoints.firstProject.Models.User;
+import com.fivePoints.firstProject.Repositries.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
@@ -16,6 +19,9 @@ import java.util.stream.Stream;
 @Service
 public class FilesStorageServiceImpl implements FilesStorageService{
 
+    @Autowired
+    UserRepository userRepository;
+
     private final Path root = Paths.get("uploads");
 
     @Override
@@ -31,9 +37,16 @@ public class FilesStorageServiceImpl implements FilesStorageService{
     }
 
     @Override
-    public void save(MultipartFile file) {
+    public void save(MultipartFile file, int Id) {
         try {
-            Files.copy(file.getInputStream(), this.root.resolve(file.getOriginalFilename()));
+            //ici on va enregistrer le photo uploaded dans notre BD
+            String fileName = file.getOriginalFilename();
+            User currentUser = this.userRepository.findById(Id).get();
+            currentUser.setPhoto(fileName);
+            this.userRepository.save(currentUser);
+
+            Files.copy(file.getInputStream(), this.root.resolve(fileName));
+
         } catch (Exception e) {
             throw new RuntimeException("Could not store the file. Error: " + e.getMessage());
         }

@@ -2,6 +2,7 @@ package com.fivePoints.firstProject.Controllers;
 
 import com.fivePoints.firstProject.Message.ResponseMessage;
 import com.fivePoints.firstProject.Models.FileInfo;
+import com.fivePoints.firstProject.Models.User;
 import com.fivePoints.firstProject.Services.FilesStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
@@ -23,11 +24,11 @@ public class FilesController {
     @Autowired
     FilesStorageService storageService;
 
-    @PostMapping("/upload")
-    public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file") MultipartFile file) {
+    @PostMapping("/upload/{Id}")
+    public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file") MultipartFile file, @PathVariable("Id") int Id) {
         String message = "";
         try {
-            storageService.save(file);
+            storageService.save(file, Id);
 
             message = "Uploaded the file successfully: " + file.getOriginalFilename();
             return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
