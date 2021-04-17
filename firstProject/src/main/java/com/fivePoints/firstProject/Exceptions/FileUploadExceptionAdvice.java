@@ -1,6 +1,6 @@
 package com.fivePoints.firstProject.Exceptions;
 
-import com.fivePoints.firstProject.Message.ResponseMessage;
+import com.fivePoints.firstProject.Payload.Responses.ResponseMessage;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;

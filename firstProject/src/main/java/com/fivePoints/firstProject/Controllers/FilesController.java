@@ -1,8 +1,7 @@
 package com.fivePoints.firstProject.Controllers;
 
-import com.fivePoints.firstProject.Message.ResponseMessage;
+import com.fivePoints.firstProject.Payload.Responses.ResponseMessage;
 import com.fivePoints.firstProject.Models.FileInfo;
-import com.fivePoints.firstProject.Models.User;
 import com.fivePoints.firstProject.Services.FilesStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
