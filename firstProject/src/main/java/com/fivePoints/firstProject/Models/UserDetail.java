@@ -3,6 +3,8 @@ package com.fivePoints.firstProject.Models;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -15,7 +17,7 @@ import java.util.Date;
 public class UserDetail {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(name = "age")
@@ -30,7 +32,19 @@ public class UserDetail {
     @Column(name = "linkedinLink")
     private String linkedinLink;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id")
+    // OneToOne Relation with user entity
+    @OneToOne(mappedBy = "userDetail")
     private User user;
+
+    @Basic(optional = false)
+    @CreationTimestamp
+    @Column(name = "created_at")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdAt = new Date();
+
+
+    @UpdateTimestamp
+    @Column(name = "updated_at")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date updatedAt = new Date();
 }

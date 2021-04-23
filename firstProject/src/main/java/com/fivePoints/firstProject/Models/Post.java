@@ -1,13 +1,15 @@
 package com.fivePoints.firstProject.Models;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.Date;
+
 
 @Data
 @AllArgsConstructor
@@ -17,7 +19,7 @@ import java.util.List;
 public class Post {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(name = "title")
@@ -32,4 +34,15 @@ public class Post {
     @ManyToOne
     @JoinColumn(name="user_id", nullable=false)
     private User user;
+
+    @Basic(optional = false)
+    @CreationTimestamp
+    @Column(name = "created_at")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdAt = new Date();
+
+    @UpdateTimestamp
+    @Column(name = "updated_at")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date updatedAt = new Date();
 }

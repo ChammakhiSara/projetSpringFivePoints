@@ -17,6 +17,7 @@ public class RoleController {
     @Autowired
     RoleService roleService;
 
+    //methode POST with URL to add new role
     @PostMapping("/")
     public ResponseEntity<Role> saveNewRole(@RequestBody Role role)
     {
@@ -24,6 +25,7 @@ public class RoleController {
         return new ResponseEntity<>(savedRole, HttpStatus.CREATED);
     }
 
+    //methode GET with URL to get all the roles from dataBase
     @GetMapping("/")
     public ResponseEntity<List<Role>> getAllRoles()
     {
@@ -31,6 +33,7 @@ public class RoleController {
         return new ResponseEntity<>(listRoles, HttpStatus.OK);
     }
 
+    //methode GET with URL to find one role
     @GetMapping("/{id}")
     public ResponseEntity<?> findUserByID(@PathVariable("id") int id)
     {
@@ -38,6 +41,7 @@ public class RoleController {
         return new ResponseEntity<>(role, HttpStatus.OK);
     }
 
+    //methode PUT with URL to update existing role
     @PutMapping("/{id}")
     public ResponseEntity<ResponseMessage> updateUserByID(@PathVariable("id") int id, @RequestBody Role role)
     {

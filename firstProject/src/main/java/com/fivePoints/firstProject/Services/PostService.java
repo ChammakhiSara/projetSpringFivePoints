@@ -20,9 +20,9 @@ public class PostService {
     @Autowired
     UserRepository userRepository;
 
-    public  String addPost(Post post , int userId) throws ResourceNotFoundException {
-
-        Optional<User> userdata = this.userRepository.findById(userId);
+    //add a new post to the dataBase
+    public  String addNewPost(Post post , int user_id) throws ResourceNotFoundException {
+        Optional<User> userdata = this.userRepository.findById(user_id);
         if(userdata.isPresent()){
             User user = userdata.orElseThrow(()-> new ResourceNotFoundException("user not found"));
             post.setUser(user);
@@ -35,12 +35,13 @@ public class PostService {
         }
     }
 
-    public List<Post> getPosts() {
-
-        return postsRepository.findAll();
+    //get all the list of posts added to the dataBase
+    public List<Post> getAllPosts() {
+        return this.postsRepository.findAll();
     }
 
-    public String deletePost(int id) {
+    //delete one post by her id
+    public String deletePostById(int id) {
         Optional<Post> postData = this.postsRepository.findById(id);
         //System.out.println(postData.isPresent());
         if (postData.isPresent()){
@@ -51,27 +52,27 @@ public class PostService {
         }
     }
 
-    public Post getPostById(int id) {
+    //get or find one post by her id
+    public Post findPostById(int id) {
         Optional<Post> postData = this.postsRepository.findById(id);
         return postData.orElseThrow(() -> new ResourceNotFoundException("post not found"));
     }
 
-    public String updatePost(int id , Post post , int userId) throws ResourceNotFoundException {
+    //update the post by her id and the object post wanted to update
+    public String updatePostById(Post post, int id) throws ResourceNotFoundException {
         Optional<Post> postData = this.postsRepository.findById(id);
-        Optional<User> userData = this.userRepository.findById(userId);
         if (postData.isPresent()) {
-            User user = userData.orElseThrow(() -> new ResourceNotFoundException("user not found"));
             Post postfound = postData.orElseThrow(() -> new ResourceNotFoundException("post not found"));
 
             postfound.setTitle(post.getTitle());
             postfound.setDescription(post.getDescription());
             postfound.setPublished(post.getPublished());
 
-            postfound.setUser(user);
             this.postsRepository.save(postfound);
-            return "post Technique modifié";
+            return "post modifié";
         } else {
             throw new ResourceNotFoundException("post not found");
         }
     }
+
 }

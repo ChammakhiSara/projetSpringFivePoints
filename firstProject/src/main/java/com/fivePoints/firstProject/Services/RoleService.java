@@ -15,22 +15,26 @@ public class RoleService {
     @Autowired
     RoleRepository roleRepository;
 
+    //add a new role to the dataBase
     public Role saveNewRole(Role role)
     {
         return this.roleRepository.save(role);
     }
 
+    //get all the list of roles added to the dataBase
     public List<Role> getAllRoles()
     {
         return this.roleRepository.findAll();
     }
 
+    //get or find one role by his id
     public Role findRoleByID(int id)
     {
         Optional<Role> roleData = this.roleRepository.findById(id);
         return roleData.orElseThrow(() -> new ResourceNotFoundException("Role not found"));
     }
 
+    //update the role by his id and the object role wanted to update
     public String updateRoleByID(int id, Role role)
     {
         Optional<Role> roleData = this.roleRepository.findById(id);
