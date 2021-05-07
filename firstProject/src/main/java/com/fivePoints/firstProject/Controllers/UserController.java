@@ -54,7 +54,7 @@ public class UserController {
 
     //affect role to user
     @PutMapping("/affect_role/{user_id}/{role_id}")
-    public ResponseEntity<ResponseMessage> affectUserToRole(int user_id, int role_id) {
+    public ResponseEntity<ResponseMessage> affectUserToRole(@PathVariable(value ="user_id" ) int user_id,@PathVariable(value="role_id") int role_id) {
         String message = this.userService.affectUserToRole(user_id, role_id);
         return new ResponseEntity<>(new ResponseMessage(message), HttpStatus.OK);
     }

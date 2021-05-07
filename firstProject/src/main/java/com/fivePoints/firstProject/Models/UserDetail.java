@@ -33,7 +33,8 @@ public class UserDetail {
     private String linkedinLink;
 
     // OneToOne Relation with user entity
-    @OneToOne(mappedBy = "userDetail")
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     @Basic(optional = false)

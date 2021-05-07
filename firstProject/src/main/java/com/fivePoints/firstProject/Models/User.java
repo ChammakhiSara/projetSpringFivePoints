@@ -40,8 +40,7 @@ public class User implements Serializable {
 
     // OneToOne Relation with userDetail entity
     @JsonIgnore
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "userDetail_id", referencedColumnName = "id")
+    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private UserDetail userDetail;
 
     // OneToMany Relation with post entity
